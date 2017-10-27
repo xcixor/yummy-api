@@ -12,7 +12,6 @@ from config import config
 db = SQLAlchemy()
 
 
-
 def create_app(configuration):
     """It initializes the application"""
 
