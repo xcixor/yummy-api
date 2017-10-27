@@ -5,3 +5,6 @@ myvenv/lib64
 myvenv/pyvenv.cfg
 myvenv/share
 myvenv/
+../__pycache__/
+../__pycache__
+__pycache__
