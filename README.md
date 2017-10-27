@@ -1,0 +1,2 @@
+[![Coverage Status](https://coveralls.io/repos/github/xcixor/yummy-api/badge.svg?branch=master)](https://coveralls.io/github/xcixor/yummy-api?branch=master)
+[![Build Status](https://travis-ci.org/xcixor/yummy-api.svg?branch=master)](https://travis-ci.org/xcixor/yummy-api)
