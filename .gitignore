@@ -1,0 +1,6 @@
+myvenv/bin
+myvenv/include
+myvenv/lib
+myvenv/lib64
+myvenv/pyvenv.cfg
+myvenv/share
