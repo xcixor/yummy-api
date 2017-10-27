@@ -8,9 +8,6 @@ class Config:
     SECRET_KEY = 'You cannot hack this site fool'
     SQLALCHEMY_COMMIT_ON_TEARDOWN = True
     SQLALCHEMY_TRACK_MODIFICATIONS = False
-    password = 'pN75216895#'
-    username = 'xcixor'
-    database = 'yummy_recipes'
 
 
     @staticmethod
@@ -20,7 +17,9 @@ class Config:
 class Development(Config):
     """Settings used for development"""
     DEBUG = True
-    SQLALCHEMY_DATABASE_URI = 'postgresql://xcixor:pN75216895#@localhost/yummy_recipes'
+    # SQLALCHEMY_DATABASE_URI = os.environ['DATABASE_URL'] or \
+    SQLALCHEMY_DATABASE_URI = 'postgresql:///yummy_recipes'
+
 
 
 class Testing(Config):
