@@ -20,15 +20,9 @@ def validate_name(username):
 def register():
     """Registers new users"""
     if request.method == 'POST':
-        # username = str(request.data.get('username', ''))
         username = request.json.get('username')
         password = request.json.get('password')
         confirm_password = request.json.get('confirm_password')
-        # password = str(request.data.get('password', ''))
-        # confirm_password = str(request.data.get('confirm_password', ''))
-        # username = {'name': request.json['username']}
-        # password = {'password': request.json['password']}
-        # confirm_password = {'confirm_password': request.json['confirm_password']}
 
         if username and password and confirm_password:
             valid_username = validate_name(username)
@@ -43,11 +37,8 @@ def register():
                 response = {'message': 'Passwords do not match'}
                 return make_response(jsonify(response)), 400
 
-            reg_user = User.query.filter_by(username=username).first()
+            reg_user = User.find_user(username)
             if not reg_user:
-                # data = request.data
-                # username = data['username']
-                # password = data['password']
                 user = User(username=username, password=password)
                 user.save()
                 response = {'message': 'Registered successfully'}
