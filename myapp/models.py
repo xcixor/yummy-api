@@ -3,12 +3,19 @@
 from . import db
 
 class User(db.Model):
-    """Defines the user table"""
+    """
+    Defines the user table
+    """
     __tablename__ = 'users'
     id = db.Column(db.Integer, primary_key=True)
     username = db.Column(db.String(64), nullable=False, index=True)
     password = db.Column(db.String(256), nullable=False, unique=True)
-    categories = db.relationship('Category', backref = 'user')
+    categories = db.relationship('Category', backref='user')
+
+    def save(self):
+        """Saves a user to the database"""
+        db.session.add(self)
+        db.session.commit()
 
     def __repr__(self):
         return '<User: {}>'.format(self.username)
