@@ -8,6 +8,7 @@ class Config:
     SECRET_KEY = 'You cannot hack this site fool'
     SQLALCHEMY_COMMIT_ON_TEARDOWN = True
     SQLALCHEMY_TRACK_MODIFICATIONS = False
+    CSRF_ENABLED = True
     # SQLALCHEMY_DATABASE_URI = os.getenv('DATABASE_URL')
 
     @staticmethod
