@@ -10,3 +10,4 @@ myvenv/
 __pycache__
 testmodels.py
 data.sqlite
+migrations
