@@ -38,9 +38,21 @@ class UserTestCase(unittest.TestCase):
         }
         self.user3 = {
             'username': 'mrndungu',
-            'password': 'password',
-            'confirm_password': 'passwordtwo'
+            'password': 'pass',
+            'confirm_password': 'pass'
         }
+        self.user4 = {
+            'username': 'mrndungu',
+            'password': 'passone',
+            'confirm_password': 'passtwo'
+        }
+        self.user5 = {
+            'username': 'mrpeterndungu',
+            'password': 'pass1',
+            'confirm_password': 'pass1'
+        }
+        self.headers = {'Content-type': 'application/json'}
+        self.url = '/auth/register'
 
     def tearDown(self):
         """Remove the created variables"""
@@ -50,9 +62,28 @@ class UserTestCase(unittest.TestCase):
 
     def test_username_validity(self):
         """Tests whether the username provided contains any special chatacters except underscores"""
-        result = self.client().post('/auth/register',
-                                 data={'username': 'ndu#4%@#$', 'password': 'somepassword', 'confirm_password': 'somepassword'})
-
-
-        # result = self.client().post('/auth/register', data=jsonify(self.user2))
+        result = self.client().post(self.url, data=self.user1, headers=self.headers)
         self.assertEqual(result.status_code, 400)
+
+    def test_password_length(self):
+        result = self.client().post(self.url, data=self.user3, headers=self.headers)
+        self.assertAlmostEqual(result.status_code, 400)
+
+    def test_password_equal_confirmpassword(self):
+        """Tests whether the confirmation password supplied matches the actual password"""
+        result = self.client().post(self.url, data=self.user4, headers=self.headers)
+        self.assertEqual(result.status_code, 400)
+
+    def test_user_already_exists(self):
+        """Tests whether registering user already exists"""
+        self.client().post(self.url, data=self.user1, headers=self.headers)
+        result = self.client().post(self.url, data=self.user1, headers=self.headers)
+        self.assertEqual(result.status_code, 400)
+
+    def test_register_user(self):
+        """Tests whether a user can be registered successfully"""
+        result = self.client().post(self.url, data=self.user5, headers=self.headers)
+        self.assertEqual(result.status_code, 201)
+        
+
+        
