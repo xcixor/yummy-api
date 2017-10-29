@@ -1,4 +1,5 @@
 """Defines the persistent entities used by the api"""
+import re
 
 from . import db
 
@@ -19,7 +20,13 @@ class User(db.Model):
         """Creates a user with a username and password"""
         self.username = username
         self.password = password
-        
+
+    @staticmethod
+    def validate_name(username):
+        """Validates whether the username has special characters"""
+        if re.match("^[a-zA-Z0-9 _]*$", username):
+            return True
+        return False        
 
     def save(self):
         """Saves a user to the database"""
