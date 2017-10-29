@@ -1,5 +1,4 @@
 """Defines the api's routes for registration"""
-import re
 
 from . import api
 
@@ -9,23 +8,23 @@ from ..models import User
 
 from ..models import User
 
-def validate_name(username):
-    """Validates whether the username has special characters"""
-    if re.match("^[a-zA-Z0-9 _]*$", username):
-        return True
-    return False
+import json
 
 
 @api.route('/auth/register',  methods=['POST'])
 def register():
     """Registers new users"""
     if request.method == 'POST':
+        # username = str(request.data.get('username', ''))
+        # password = str(request.data.get('password', ''))
+        # confirm_password = str(request.data.get('confirm_password', ''))
+
         username = request.json.get('username')
         password = request.json.get('password')
         confirm_password = request.json.get('confirm_password')
 
         if username and password and confirm_password:
-            valid_username = validate_name(username)
+            valid_username = User.validate_name(username)
             if not valid_username:
                 response = {'message': 'Username cannot contain special characters except for underscores'}
                 return make_response(jsonify(response)), 400
