@@ -10,6 +10,8 @@ from ..models import User
 
 import json
 
+# import jwt
+
 
 @api.route('/auth/register',  methods=['POST'])
 def register():
@@ -55,6 +57,7 @@ def login():
                 user = User.find_user(username)
                 if user:
                     response = {'message': 'Login successful'}
+                    # token = jwt.encode
                     return make_response(jsonify(response)), 200
                 response = {'message': 'Username/Password combination is invalid, please check again'}
                 return make_response(jsonify(response)), 401
